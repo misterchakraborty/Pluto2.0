@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>
+      FaceRecognition
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <button ion-button icon-start outline block color="dark" (click)="onTakePicture()">
+    <ion-icon name="camera"></ion-icon>
+    Take a picture
+  </button>
+
+  <button ion-button icon-start outline block color="dark" (click)="onChooseImageFromGallery()">
+    <ion-icon name="image"></ion-icon>
+    Choose from gallery
+  </button>
+
+  <img *ngIf="image" [src]="domSanitizer.bypassSecurityTrustUrl(image)">
+
+ <div *ngIf="response" text-center>
+      <ion-list>
+
+        <ion-list-header text-center >
+          Persons
+        </ion-list-header>
+        <ion-item *ngFor="let p of response" text-center>
+          {{p}}
+        </ion-item>
+
+        <ion-item *ngIf="unknowPersonsNumber > 0" text-center>
+            {{unknowPersonsNumber}} Unknow person(s)
+        </ion-item>
+      </ion-list>
+
+
+      <button ion-button icon-end color="secondary" (click)="getPerson()">
+        Retry
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+  </div>
+
+</ion-content>
